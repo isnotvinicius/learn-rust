@@ -1,3 +1,8 @@
-fn main() {
-    println!("Hello, world!");
+fn main () {
+    let total: i32 = 30;
+    println!("Trabalho {} horas", total);
 }
+
+
+
+
