@@ -110,3 +110,43 @@ fn main() {
     println!("Trabalhou {} horas", total);
 }
 ```
+
+## Tipos Primitivos do Rust
+
+Os tipos primitos do Rust são dividos em duas categorias. Vamos analisar os dois.
+
+### Escalares
+
+É onde iremos armazenar apenas um valor dentro de uma escala conhecida, permitindo uma comparação direta entre valores. São exemplos de tipos escalares:
+
+- inteiro (int);
+- flutuante (floating point / float);
+- booleano (bool);
+- caractere (char).
+
+### Compostos
+
+Servem para agregar multiplos valores. São exemplos de tipos compostos:
+
+- Tupla (tuple) - Armazena vários valores de tipos diferentes `(5, true, 42.1, 'a')`;
+- Matriz (array) - Armazena vários valores de tipos iguais.
+
+#### Inteiros
+
+| bits | signed | unsigned |
+|------|--------|----------|
+| 8    | i8     | u8       |
+| 16   | i16    | u16      |
+| 32   | i32    | u32      |
+| 64   | i64    | u64      |
+| 128  | i128   | u128     |
+| arch | isize  | usize    |
+|
+
+- Signed: Quando utilizamos a notação signed (i) quer dizer que a váriavel irá suportar números inteiros positivos ou negativos. Tem um intervalo de `-128 até 127`.
+
+- Unsigned: Quando utilizamos a notação unsigned (u) quer dizer que a variável irá suportar somente números inteiros positivos. Tem um intervalo de `0 até 255`.
+
+Quando não definirmos o tipo da variável, o Rust irá assumir i32 como padrão.
+
+OBS: A linha `arch` irá variar de acordo com a arquitetura em que o binário é executado, se for arquitetura 32bits ele será i32 ou u32, se for 64bits será i64 ou u64.
