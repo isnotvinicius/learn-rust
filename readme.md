@@ -27,20 +27,86 @@ Dentro do nosso workspace (diretório) criado, podemos utilizar o próprio Cargo
 
 No rust, criamos variáveis utilizando a palavra chave `let`. O rust não permite definirmos variáveis no escopo global da aplicação, faz-se então necessário declarar variáveis dentro de funções. Em linguagens compiladas, normalmente é necessário também deletar a váriavel alocada para não acontecer um memory leak, em alguns casos o próprio compilador faz isso com um garbage collector. No caso do Rust, é utilizado o RAII (Resource Acquisition Is Initialization) já implicito na linguagem, ou seja, após um escopo ser terminado a váriavel deixará de existir. 
 
-```
+```rust
 fn main () {
-  let total = 30;
-  println!("Trabalhou {} horas", total);
+    let total = 30;
+    println!("Trabalhou {} horas", total);
 }
 ```
 
 Toda vez que uma variável é definida no rust, precisamos tipar ela. No exemplo acima não fizemos isso, então o compilador utiliza inferência, ou seja, através da sintaxe ou do contexto o compilador é capaz de definir o tipo da variável. Vamos tipar ela como um inteiro de 32 bits.
 
-```
+```rust
 fn main () {
-  let total: i32 = 30;
-  println!("Trabalhou {} horas", total);
+    let total: i32 = 30;
+    println!("Trabalhou {} horas", total);
 }
 ```
 
+E se, após definir a variável e atribuir um valor, eu tentar substituir este valor?
 
+```rust
+fn main () {
+    let total: i32 = 30;
+    println!("Trabalho {} horas", total);
+    total = 44;
+    println!("Trabalho {} horas", total);
+}
+```
+
+O compilador irá informar um erro de imutabilidade. O que isso significa? Toda variável em Rust é imutável, portanto ao atribuir um valor a uma variável, não podemos trocá-lo. A menos que ele seja definido como mutável com a palavra chave `mut`.
+
+```rust
+fn main () {
+    // i32, inteiro de 32 bits, positivo ou negativo.
+    let mut total: i32 = 30;
+    println!("Trabalhou {} horas", total);
+    total = 44;
+    println!("Trabalhou {} horas", total);
+}
+```
+
+Na maior parte das vezes é preferível que o código seja imutável para termos uma maior segurança, avalie o contexto e utilize o que for melhor.
+
+Outra particularidade do rust é que ele possuí tipagem forte, ou seja, quando defino uma váriavel com valor inteiro e tento trocar para outro tipo, isto gerará um erro. Se a variável iniciar como um inteiro e eu tentar atribuir um valor numérico para ela, o compilador acusará um erro. Caso seja necessário trocar o tipo da variável, basta defini-lá novamente com a palavra chave `let`.
+
+A partir da váriavel 'horas', vamos imprimir quantos segundos um trabalhador trabalhou. Neste caso, o valor sempre será fixo e, em casos como este, não é legal utilizarmos valores que podem variar, é aí que entram as constantes. Podem serem definidas no contexto principal da aplicação, dentro de uma função ou no contexto interior de uma função, basta utilizar a palavra chave `const`. Por padrão do rust, constantes utilizam Screaming Snake Case para definição do seu nome, ou seja, tudo em maiúsculo e separado por underline (_). Deve SEMPRE ter seu tipo definido.
+
+```rust
+// u32 equivale a unsigned integer, só irá receber números positivos de 32 bits.
+const SECONDS_IN_MINUTE: u32 = 60;
+const MINUTES_IN_HOUR: u32 = 60;
+const SECONDS_IN_HOUR: u32 = SECONDS_IN_MINUTE * MINUTES_IN_HOUR;
+
+fn main() {
+    let total = 30;
+    let total_em_segundos = total * SECONDS_IN_HOUR;
+    println!("Trabalhou {} segundos", total_em_segundos);
+}
+
+```
+
+## Escopo Interno
+```rust
+fn main() {
+    let total: i32 = 30;
+    {
+        let total = 44;
+        println!("Trabalhou {} horas", total);
+    }
+    println!("Trabalhou {} horas", total);
+}
+```
+
+Dentro de um escopo, como a fn main, podemos definir um outro escopo como interno, isto irá printar as duas variáveis. Lembrando que variáveis em Rust só existem no próprio escopo, portanto mesmo que o escopo externo ainda não tenha sido finalizado, fora do interno a variável definida NÃO pode ser utilizada. O inverso pode ocorrer, utilizar uma variável do escopo externo no escopo interno, somando um valor a ela por exemplo.
+
+```rust
+fn main() {
+    let total = 30;
+    {
+        let total = total + 20;
+        println!("Trabalhou {} horas", total);
+    }
+    println!("Trabalhou {} horas", total);
+}
+```
