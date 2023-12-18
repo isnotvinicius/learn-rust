@@ -141,7 +141,7 @@ Servem para agregar multiplos valores. São exemplos de tipos compostos:
 | 64   | i64    | u64      |
 | 128  | i128   | u128     |
 | arch | isize  | usize    |
-|
+
 
 - Signed: Quando utilizamos a notação signed (i) quer dizer que a váriavel irá suportar números inteiros positivos ou negativos. Tem um intervalo de `-128 até 127`.
 
