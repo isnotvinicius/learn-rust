@@ -150,3 +150,81 @@ Servem para agregar multiplos valores. São exemplos de tipos compostos:
 Quando não definirmos o tipo da variável, o Rust irá assumir i32 como padrão.
 
 OBS: A linha `arch` irá variar de acordo com a arquitetura em que o binário é executado, se for arquitetura 32bits ele será i32 ou u32, se for 64bits será i64 ou u64.
+
+#### Tupla 
+
+A tupla tem um tamanho fixo, portanto a partir de sua definição, o tamanho não pode ser alterado. Caso queira tipar os elementos da tupla, é necessário tipar os elementos separadamente.
+
+```
+fn main () {
+    let numbers: (i32, i32, f64) = (1, 2, 3.5);
+    println!("{:?}", numbers);
+}
+```
+
+A tupla, assim como um array, possuí indexação. Para acessar os elementos da tupla, utilizamos o '.'.
+
+```
+fn main() {
+    let numbers = (1, 2, 3.5);
+    println!("{:?}", numbers.2);
+}
+```
+
+Podemos também desestruturar a tupla através de pattern matching. 
+
+```
+fn main() {
+    let numbers = (1, 2, 3);
+
+    let (a, b, c) = numbers;
+    
+    // a = 1, b = 2, c = 3
+    println!("{:?}", a);
+}
+```
+
+Apesar do tamanho da tupla não poder ser alterado uma vez que seja definido, o mesmo não pode ser dito para seus valores. Se definirmos a tupla como mútavel, é possível alterar seu valor. Basta acessar o index desejado e substituir o valor. Não é possível alterar o valor para um tipo diferente do que foi definido. Lembrando que caso não seja tipado, o próprio rust irá tipar para nós.
+
+```
+fn main() {
+    // tupla mútavel
+   let mut numbers = (1, 2, 3);
+    
+    // substituimos o index 0 de valor 1 para valor 50
+    numbers.0 = 50;
+
+    println!("{:?}", numbers);
+}
+```
+
+#### Arrays
+
+Diferente da tupla, um array deve ter os elementos do mesmo tipo. Podemos tipar também, no caso do array passamos o tipo e também a quantidade de elementos (a indexação não é levada em conta, portanto o 0 não é contado).
+
+```
+fn main() {
+    // array do tipo i32 com 3 elementos
+    let numbers: [i32;3] = [1, 2, 3];
+  
+    // como em toda linguagem, acessamos o index através de chaves.
+    println!("{:?}", numbers[0]);
+}
+```
+
+O array também pode ser definido como mútavel, fazendo com que possamos trocar os valores através do seu index, desde que seja do mesmo tipo definido na criação do array.
+
+Podemos fatiar o array utlizando slice.
+
+```
+fn main() {
+    let numbers = [1, 2, 3];
+
+    // Utilizamos o & para pegar uma referência do array e depois fazemos o slice, do elemento 1 até o 2, isso irá printar o segundo elemento do array.
+    println!("{:?}", &numbers[1..2]);
+}
+```
+
+
+
+
