@@ -207,7 +207,7 @@ fn main() {
     // array do tipo i32 com 3 elementos
     let numbers: [i32;3] = [1, 2, 3];
   
-    // como em toda linguagem, acessamos o index através de chaves.
+    // como em toda linguagem, acessamos o index através de colchetes.
     println!("{:?}", numbers[0]);
 }
 ```
