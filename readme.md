@@ -2,6 +2,8 @@
 
 Este projeto tem como objetivo aprender como utilizar a linguagem Rust e suas ferramentas. Fique a vontade para contribuir.
 
+Conteúdo baseado na playlist [Aprenda Rust](https://www.youtube.com/playlist?list=PLjSf4DcGBdiGCNOrCoFgtj0KrUq1MRUME) do @rochacbruno.
+
 ## Instalação
 
 Aqui estou utilizando WSL com Arch Linux, basta executar `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh` que o Rust junto do Cargo será instalado. Para o seu sistema operacional, cheque a [documentação](https://www.rust-lang.org/pt-BR/learn/get-started) oficial do Rust para fazer o passo a passo.
@@ -21,7 +23,7 @@ Vamos utilizar o comando `cargo new <nome-projeto>` para criarmos um novo projet
 
 O arquivo `Cargo.toml` salva as configurações do projeto e é de extrema importância. Fazendo um paralelo, ele seria como o package.json ou o composer.json. Note também que foi criado um diretório chamado `src` contendo o arquivo `main.rs`, este arquivo já possuí a função main necessária para compilarmos o projeto.
 
-Dentro do nosso workspace (diretório) criado, podemos utilizar o próprio Cargo para fazer o build do projeto, basta utilizar o comando `cargo build`. Ele além de compilar e gerar o binário necessário, faz checagens durante o processo. Ao executar o comando, note que é gerado um arquivo `Cargo.lock` e um diretório `target`. O Cargo oferece uma variedade de opções para serem utilizadas, como por exemplo formatar nosso código para seguir as convenções do Rust com o comando `cargo fmt`. Explore a documentação para mais opções.
+Dentro do nosso workspace (diretório) criado, podemos utilizar o próprio Cargo para fazer o build do projeto, basta utilizar o comando `cargo build`. Elealém de compilar e gerar o binário necessário, faz checagens durante o processo. Ao executar o comando, note que é gerado um arquivo `Cargo.lock` e um diretório `target`. O Cargo oferece uma variedade de opções para serem utilizadas, como por exemplo formatar nosso código para seguir as convenções do Rust com o comando `cargo fmt`. Explore a documentação para mais opções.
 
 ## Variáveis e Constantes
 
