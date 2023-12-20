@@ -257,7 +257,7 @@ fn main() {
 
 ```
 fn main() {
-    // função fictícia, deixará de existir quando main() terminar, mas pode ser alterado manualmete
+    // Deixará de existir quando main() terminar, mas pode ser alterado manualmete
     let users = get_users();
 }
 ```
