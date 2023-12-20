@@ -227,6 +227,41 @@ fn main() {
 }
 ```
 
+## Memory Awareness
+
+Quando o programa começa a ser executado, é dado a esse programa acesso a três tipos de memórias: Static, Stack e Heap. Quando programos em Rust, precisamos ter exata noção exata de onde cada elemento criado será alocado, isso ajuda na performance da aplicação e também na legibilidade do código.
+
+- Static: É alocada assim que o programa começa a ser executado. Tem um tamanho fixo e permanece por todo o ciclo de vida do programa, ao finalizar o programa o espaço é liberado. O binário do programa, variáveis estáticas e strings literais são alocadas no espaço de memória static. Variáveis armazenadas aqui possuem um acesso mais fácil.
+
+```
+// Informamos ao compilador que essa variável deve ir no espaço static.
+static _Y: u32 = 13;
+
+fn main() {
+
+}
+```
+
+- Stack: Quando o programa é executado, ele calcula o tamanho necessário para alocar os recursos fixos e cria o bloco de memória Stack, fazendo com que seu tamanho seja dinâmico até o limite definido pelo compilador. Seus valores tem a mesma duração que a função, portanto ao retornar a função os recursos serão desalocados. Argumentos de funções e variáveis locais são alguns exemplos. Os recursos são alocados em pilha (como o nome já diz), portanto acessar recursos pode requerir performance. Caso haja uma tentativa de alocar recursos além do que foi definido para o espaço stack, teremos um erro 'stack overflow'.
+
+```
+fn main() {
+    // Serão todas alocadas em Stack e deixarão de existir assim que main() terminar de ser executada.
+    let x = 5;
+    let y = 5.5;
+    let z = true;
+}
+```
+
+- Heap: Em alguns casos, os valores que vamos trabalhar podem variar. Quando consultamos um banco de dados, por exemplo, não sabemos exatamente quantos dados serão retornados. Nestes casos o espaço de memória utilizado será o 'Heap'. Tem tamanho dinâmico que irá variar de acordo com o limite do computador. Seu ciclo de vida é definido pelo programador ou pela linguagem e os recursos são desalocados manualmente, via Garbage Collector ou via RAII, no Rust é feito através de RAII. Valores que devem permanecer além de funções, valores compartilhados entre threads, valores grandes, qualquer valor que não pode ser definido durante a compilação será alocado em Heap. 
+
+```
+fn main() {
+    // função fictícia, deixará de existir quando main() terminar, mas pode ser alterado manualmete
+    let users = get_users();
+}
+```
+
 
 
 
