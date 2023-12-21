@@ -157,7 +157,7 @@ OBS: A linha `arch` irá variar de acordo com a arquitetura em que o binário é
 
 A tupla tem um tamanho fixo, portanto a partir de sua definição, o tamanho não pode ser alterado. Caso queira tipar os elementos da tupla, é necessário tipar os elementos separadamente.
 
-```
+```rust
 fn main () {
     let numbers: (i32, i32, f64) = (1, 2, 3.5);
     println!("{:?}", numbers);
@@ -166,7 +166,7 @@ fn main () {
 
 A tupla, assim como um array, possuí indexação. Para acessar os elementos da tupla, utilizamos o '.'.
 
-```
+```rust
 fn main() {
     let numbers = (1, 2, 3.5);
     println!("{:?}", numbers.2);
@@ -175,7 +175,7 @@ fn main() {
 
 Podemos também desestruturar a tupla através de pattern matching. 
 
-```
+```rust
 fn main() {
     let numbers = (1, 2, 3);
 
@@ -188,7 +188,7 @@ fn main() {
 
 Apesar do tamanho da tupla não poder ser alterado uma vez que seja definido, o mesmo não pode ser dito para seus valores. Se definirmos a tupla como mútavel, é possível alterar seu valor. Basta acessar o index desejado e substituir o valor. Não é possível alterar o valor para um tipo diferente do que foi definido. Lembrando que caso não seja tipado, o próprio rust irá tipar para nós.
 
-```
+```rust
 fn main() {
     // tupla mútavel
    let mut numbers = (1, 2, 3);
@@ -204,7 +204,7 @@ fn main() {
 
 Diferente da tupla, um array deve ter os elementos do mesmo tipo. Podemos tipar também, no caso do array passamos o tipo e também a quantidade de elementos (a indexação não é levada em conta, portanto o 0 não é contado).
 
-```
+```rust
 fn main() {
     // array do tipo i32 com 3 elementos
     let numbers: [i32;3] = [1, 2, 3];
@@ -218,7 +218,7 @@ O array também pode ser definido como mútavel, fazendo com que possamos trocar
 
 Podemos fatiar o array utlizando slice.
 
-```
+```rust
 fn main() {
     let numbers = [1, 2, 3];
 
@@ -233,7 +233,7 @@ Quando o programa começa a ser executado, é dado a esse programa acesso a trê
 
 - Static: É alocada assim que o programa começa a ser executado. Tem um tamanho fixo e permanece por todo o ciclo de vida do programa, ao finalizar o programa o espaço é liberado. O binário do programa, variáveis estáticas e strings literais são alocadas no espaço de memória static. Variáveis armazenadas aqui possuem um acesso mais fácil.
 
-```
+```rust
 // Informamos ao compilador que essa variável deve ir no espaço static.
 static _Y: u32 = 13;
 
@@ -244,7 +244,7 @@ fn main() {
 
 - Stack: Quando o programa é executado, ele calcula o tamanho necessário para alocar os recursos fixos e cria o bloco de memória Stack, fazendo com que seu tamanho seja dinâmico até o limite definido pelo compilador. Seus valores tem a mesma duração que a função, portanto ao retornar a função os recursos serão desalocados. Argumentos de funções e variáveis locais são alguns exemplos. Os recursos são alocados em pilha (como o nome já diz), portanto acessar recursos pode requerir performance. Caso haja uma tentativa de alocar recursos além do que foi definido para o espaço stack, teremos um erro 'stack overflow'.
 
-```
+```rust
 fn main() {
     // Serão todas alocadas em Stack e deixarão de existir assim que main() terminar de ser executada.
     let x = 5;
@@ -255,7 +255,7 @@ fn main() {
 
 - Heap: Em alguns casos, os valores que vamos trabalhar podem variar. Quando consultamos um banco de dados, por exemplo, não sabemos exatamente quantos dados serão retornados. Nestes casos o espaço de memória utilizado será o 'Heap'. Tem tamanho dinâmico que irá variar de acordo com o limite do computador. Seu ciclo de vida é definido pelo programador ou pela linguagem e os recursos são desalocados manualmente, via Garbage Collector ou via RAII, no Rust é feito através de RAII. Valores que devem permanecer além de funções, valores compartilhados entre threads, valores grandes, qualquer valor que não pode ser definido durante a compilação será alocado em Heap. 
 
-```
+```rust
 fn main() {
     // Deixará de existir quando main() terminar, mas pode ser alterado manualmete
     let users = get_users();
