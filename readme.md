@@ -298,4 +298,4 @@ fn main() {
 }
 ```
 
-Para exemplos do objeto String, cheque a (documentação do Rust)[https://doc.rust-lang.org/std/string/struct.String.html]
+Para exemplos do objeto String, cheque a [documentação do Rust](https://doc.rust-lang.org/std/string/struct.String.html)
