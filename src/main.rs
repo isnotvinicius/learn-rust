@@ -1,8 +1,12 @@
+use std::io;
 
 fn main() {
-    let numbers: (i32, i32, f64) = (1, 2, 3.5);
-    
-    let (a, b, c) = numbers;
+    let mut s = String::new();
+    println!("Digite um texto:");
 
-    println!("{:?}", a);
+    io::stdin()
+        .read_line(&mut s)
+        .expect("Erro ao ler o console");
+
+    println!("Você digitou {s}");
 }

@@ -262,6 +262,40 @@ fn main() {
 }
 ```
 
+## Strings 
 
+No Rust, temos algumas diferentes opções para utilizarmos strings. Cada uma delas funciona para casos específicos, levando em conta a alocação de memória.
 
+#### String Slice
 
+Quando definimos uma string diretamente com aspas duplas, estamos dizendo que aquela string é imútavel e será armazenada na memória STATIC da aplicação. Importante salientar que o valor será armazenado em STATIC, a váriavel deixará de existir assim que seu contexto for encerrado (uma função por exemplo).
+
+```rust
+fn main() {
+    // Será armazenado no espaço STATIC da aplicação, não pode ser manipulado 
+    let s = "Vinicius";
+    
+    println!("{s}");
+}
+```
+
+##### String
+
+Caso a string a ser utilizada deve ser alterada, ou não sabemos o tamanho exato dela, utilizamos o objeto String do Rust, que irá armazenar os dados na memória HEAP da aplicação, podendo aumentar seu tamanho. 
+
+```rust
+use std::io;
+
+fn main() {
+    // Será armazenado no espaço HEAP da aplicação e pode ser não manipulado
+    let mut s = String::new();
+    println!("Digite um texto");
+   
+    // Recupero o que foi digitado pelo user e utilizo uma referência mutável da variável s
+    io::stdin().read_line(&mut s).expect("Erro ao ler o console");
+    
+    println!("Você digitou {s}");
+}
+```
+
+Para exemplos do objeto String, cheque a (documentação do Rust)[https://doc.rust-lang.org/std/string/struct.String.html]
