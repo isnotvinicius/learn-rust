@@ -6,3 +6,9 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+
+[profile.release]
+strip = true # Automaticamente faz strip dos símbolos do binário
+opt-level = "z" # Otimização para o tamanho
+lto = true # Ativa o LTO 
+codegen-units = 1 # Utiliza single codege

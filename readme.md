@@ -299,3 +299,89 @@ fn main() {
 ```
 
 Para exemplos do objeto String, cheque a [documentação do Rust](https://doc.rust-lang.org/std/string/struct.String.html)
+
+## Funções 
+
+ Em Rust, criamos funções utilizando a palavra chave `fn` seguido do nome da função, sempre em snake_case. Uma função pode ou não ter argumentos. Por obrigação, todo programa Rust deve ter a função `main()` para ser executado. Para chamar uma função, basta chamar invocar a função como em qualquer linguagem.
+
+```rust
+fn say_hello() {
+    println!("Hello World!");
+}
+
+fn main() {
+    say_hello();
+}
+```
+
+Podemos parametrizar a função, fazendo com que ela receba parâmetros que podem ser utilizados dentro dela. Se parametrizarmos a função, é obrigatório colocarmos o tipo de cada um dos parâmetros pois o rust não faz a infêrencia nestes casos. Também deve seguir o padrão snake_case, assim como o nome da função. 
+
+```rust
+// Declaro a função e recebo uma string slice como parâmetro
+fn say_hello(name: &str) {
+    println!("Hello {name}");
+}
+
+fn main() {
+    // Chamo a função criada passando o parâmetro desejado
+    say_hello("Vinicius");
+    say_hello("Joãozinho";
+}
+```
+
+Não é possível criar parâmetros genéricos no Rust. Em php, por exemplo, posso definir uma função e atribuir valores padrões para os parâmetros.
+
+```php
+<?php
+// Defino color com valor "purple" como valor padrão
+function hello($name, $color = "purple")
+{
+    echo "Hello $name, your color is $color";
+}
+
+// Substituir o valor de color na chamada da função.
+say_hello("Vinicius", "blue");
+
+// Sem passar o parâmetro color, será utilizado o valor padrão definido na função
+say_hello("Vinicius");
+?>
+```
+
+Em Rust, isso não é possível, devo definir o tipo do parâmetro e, sempre que chamar a função, passar o valor daquele parâmetro. O correto seria a função receber uma structure que por padrão define os valores dos atributos.
+
+Sempre que uma função tiver retorno, é necessário anotar o tipo daquele retorno ao declarar a função. Em algumas linguagens não é obrigatório e é permitido retornar diferentes tipos dependendo do contexto, em Rust não. Para definir o tipo do retorno, utilizamos `-> <tipo-retorno>` depois de declarar a função.
+
+```rust
+fn add_numbers(x: i32, y:i32) -> i32 {
+    // Podemos utilizar o return para retornar o resultado
+    return x + y;
+
+    // Por se tratar de uma expression (algo que cria um valor), não é necessário utilizar a palavra return.
+    // O ; deve ser retirado pois, caso utilize, a expression vira um statement e a função fica sem retorno, gerando um erro
+    x + y
+}
+
+fn main() {
+    let result = add_numbers(10, 10);
+    println!("{result}");
+}
+```
+
+## Otimizando o binário
+
+Quando buildamos nosso programa, podemos notar que ele gera um binário relativamente grande, ainda mais para códigos simples como os feitos até aqui. Isso se deve porque ao utilizarmos `cargo build`, ele faz o build para dev, portanto não otimiza o código e também gera com debuginfo, que são as mensagens que aparecem no console para nós. Para fazermos o build de release, utilizamos o comando `cargo build --release`, isso gera uma otimização no binário. Ainda não é muito, mas já é uma otimização. Para melhorar ainda mais este processo, vamos criar um perfil dentro do nosso arquivo `Cargo.toml` 
+
+```toml
+[profile.release]
+strip = true # Automaticamente faz strip dos símbolos do binário
+opt-level = "z" # Otimização para o tamanho
+lto = true # Ativa o LTO (Link Time Optimization)
+codegen-units = 1 # Utiliza uma única unidade de geração de código para otimização do tamanho (padrão são 16)
+panic = "abort" # Remove informações de traceback
+```
+
+Isso irá otimizar o build do nosso código, outras opções são possíveis, fique a vontade para pesquisar mais sobre [minificar o binário do rust](https://github.com/johnthagen/min-sized-rust).
+
+
+
+

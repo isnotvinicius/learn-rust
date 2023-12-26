@@ -8,5 +8,5 @@ fn main() {
         .read_line(&mut s)
         .expect("Erro ao ler o console");
 
-    println!("Você digitou {s}");
+    println!("Você digitou {s} atraves do console");
 }
