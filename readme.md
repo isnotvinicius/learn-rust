@@ -367,6 +367,38 @@ fn main() {
 }
 ```
 
+Vamos criar uma função para converter strings em números inteiros.
+
+```rust
+fn convert_to_number(s: &str) -> i32 {
+    s.parse.unwrap();
+}
+
+fn main() {
+    let input = "1 2 3 4 5 6 7 8";
+
+    let result: Vec<i32> = input.split(' ').map(convert_to_number).collect();
+
+    println!("{:?}", result);
+}
+```
+
+Note que a função é muito simples e pequena, estamos apenas fazendo o parse da string slice e fazemos o unwrap para pegarmos o resultado. Ao invés de criarmos uma função externa para realizar esta simples operação, podemos utilizar uma closure para convertermos a string em número diretamente na função map. Isto evita criarmos funções demais e também facilita a leitura do nosso código.
+
+```rust
+fn main() {
+    let input = "1 2 3 4 5 6 7 8";
+
+    let result: Vec<i32> = input
+        .split(' ')
+        // Utilizamos o | para definir a closure e logo após fazemos a operação
+        .map(|s| s.parse::<i32>().unwrap())
+        .collect();
+
+    println!("{:?}", result);
+}
+```
+
 ## Otimizando o binário
 
 Quando buildamos nosso programa, podemos notar que ele gera um binário relativamente grande, ainda mais para códigos simples como os feitos até aqui. Isso se deve porque ao utilizarmos `cargo build`, ele faz o build para dev, portanto não otimiza o código e também gera com debuginfo, que são as mensagens que aparecem no console para nós. Para fazermos o build de release, utilizamos o comando `cargo build --release`, isso gera uma otimização no binário. Ainda não é muito, mas já é uma otimização. Para melhorar ainda mais este processo, vamos criar um perfil dentro do nosso arquivo `Cargo.toml` 
